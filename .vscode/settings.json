@@ -1,0 +1,14 @@
+{
+  "editor.fontSize": 12,
+  "window.zoomLevel": 0,
+  "terminal.integrated.fontSize": 12,
+  "workbench.colorTheme": "Noctis Obscuro",
+  "editor.minimap.enabled": false,
+  "python.languageServer": "Pylance",
+  "python.autoComplete.extraPaths": [
+    "./signalgen.py"
+  ],
+  "python.analysis.extraPaths": [
+    "./signalgen.py"
+  ]
+}
