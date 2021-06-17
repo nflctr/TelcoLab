@@ -1,5 +1,5 @@
 from django.db import models
-# from tinymce.models import HTMLField
+from tinymce.models import HTMLField
 # Create your models here.
 
 # Kategori : Artikel (textField), Materi (charField), Gambar (imgField)
@@ -22,7 +22,7 @@ class Informations(models.Model):
   isi   = models.TextField()
   created = models.DateTimeField(auto_now_add= True)
   updated = models.DateTimeField(auto_now = True)
-  # content = HTMLField()
+  content = HTMLField()
   class Meta:
     ordering = ('judul',)
   def __str__(self):
