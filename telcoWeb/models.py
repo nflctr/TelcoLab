@@ -1,27 +1,31 @@
 from django.db import models
 
 # Create your models here.
+
+# Kategori : Artikel (textField), Materi (charField), Gambar (imgField)
+# class Kategori(models.Model):
+#   name = models.CharField(max_length=40, null=False, blank=False)
+#   def __str__(self):
+#     return self.name
+
+# Materi : Semua judul modul di TelcoLab (charField)
+# class Materi(models.Model):
+#   name = models.CharField(max_length=40, null=False, blank=False)
+#   def __str__(self):
+#     return self.name
+
 class Informations(models.Model):
+  # kategori = models.ForeignKey(Kategori, on_delete=models.SET_NULL, null=True, blank=True)
+  # materi = models.ForeignKey(Materi, on_delete=models.SET_NULL, null=True, blank=True)
   judul = models.CharField(max_length=50)
   tipe  = models.CharField(max_length=50)
   isi   = models.TextField()
   created = models.DateTimeField(auto_now_add= True)
   updated = models.DateTimeField(auto_now = True)
-
+  # class Meta:
+  #   ordering = ('judul',)
   def __str__(self):
     return self.judul
 
-# class Post(models.Model):
-#   title = models.CharField(max_length=100)
-#   body = models.TextField()
 
-#   def str(self):
-#       return "{}".format(self.title)
 
-# class Modul(models.Model):
-#   title = models.CharField(max_length=50)
-#   category = models.CharField(max_length=50)
-#   body = models.TextField()
-
-#   def str(self):
-#     return "{}".format(self.title)
