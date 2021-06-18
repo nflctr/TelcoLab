@@ -107,7 +107,7 @@ def ssb_filter(order, cutoff, ssb_demod):
 	n = np.arange(0, order)																				#
 	theta = 2*np.pi*cutoff																				#
 	h_lpf = (theta/np.pi)*np.sinc(theta*(n-0.5*order/np.pi))			#
-	return np.convolve(ssb_demod, h_lpf, 'same')									#
+	return np.convolve(ssb_demod, h_lpf, 'same')*4									#
 # -----------------------------------------------------------------------------------------------------------------------------
 """ Modul Modulasi Frekuensi """
 # Fungsi Integrator
