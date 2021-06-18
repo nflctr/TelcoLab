@@ -1,5 +1,5 @@
 # from numpy.core.numeric import Inf
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from collections import ChainMap
 from .models import Informations
 import telcoWeb.module as m
@@ -20,13 +20,19 @@ def coba(request):
 # ---------------------------------------------------------------------------------------------
 def generator(request):
   inp  = request.POST.get('param-generator')      # Get input dari web(user)
-  data = inp.split()                              # 'inp' displit jadi satu array berisi kumpulan string
-  amp  = float(data[2])                           # Ambil data amp  (float)
-  fs   = float(data[4])                           # Ambil data fs   (float)
-  freq = float(data[6])                           # Ambil data freq (float)
-  plot = data[8]                                  # Ambil data plot (string)
-  text = {'Show' : m.signalGenerator(plot,amp,fs,freq)}
-  return render(request, 'telcoLab.html', dict(ChainMap(text,txt)))
+  data = inp.split()                              # 'inp' displit jadi satu array berisi kumpulan string  
+  try:
+    data[0] == 'signal'
+    amp  = float(data[2])                           # Ambil data amp  (float)
+    fs   = float(data[4])                           # Ambil data fs   (float)
+    freq = float(data[6])                           # Ambil data freq (float)
+    plot = data[8]                                  # Ambil data plot (string)
+    text = {'Show' : m.signalGenerator(plot,amp,fs,freq)}
+    return render(request, 'telcoLab.html', dict(ChainMap(text,txt)))
+  except Exception as e:
+    print(e)
+    salah = e
+    return render(request, 'telcoLab.html', {'salah':salah})
 # ---------------------------------------------------------------------------------------------
 def dsbfc(request):
   inp  = request.POST.get('param-dsbfc')          # Get input dari web(user)
