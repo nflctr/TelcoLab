@@ -28,7 +28,7 @@ class Informations(models.Model):
   class Meta:
     ordering = ('kategori','materi','judul')
   def __str__(self):
-    return self.kategori
+    return self.judul
 
 
 
