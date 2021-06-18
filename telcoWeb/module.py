@@ -128,7 +128,7 @@ def differ(fmMod):
 def env(differ):
 	demod = abs(sg.hilbert(differ))																#
 	demodFFT = np.fft.rfft(demod) * c.rect(-1., np.pi/2)					#
-	newDemod = np.fft.irfft(demodFFT)*450													# Ada koreksi di pengali, harus diubah manual untuk menyesuaikan tampilan akhir
+	newDemod = np.fft.irfft(demodFFT)													# Ada koreksi di pengali, harus diubah manual untuk menyesuaikan tampilan akhir
 	return newDemod																								#
 # -----------------------------------------------------------------------------------------------------------------------------
 """ Modul Modulasi Digital """
@@ -143,11 +143,11 @@ def randomData(x):
 def digMod(fs,ctF,x,xSum,plot):
 	t = np.arange(0, 2, 1/fs)														# Range waktu
 	n = np.array(x)																			# n Array Data
-	if plot == 'BFSK':
+	if plot == 'BFSK':         #N = FREKUENSI deviasi
 		n[n > 0] = 5																			# Mengubah nilai bit sesuai dengan modulasi
-		n[n < 0] = -5																			# Mengubah nilai bit sesuai dengan modulasi
+		n[n == 0] = -5																			# Mengubah nilai bit sesuai dengan modulasi
 	elif plot == 'BPSK':
-		n[n > 0] = 180																		# Mengubah nilai bit sesuai dengan modulasi
+		n[n == 0] = 180																		# Mengubah nilai bit sesuai dengan modulasi
 	s = 2*fs/n.size  																		# samples per bit
 	d = np.repeat(n, s)  																# Perulangan nilai n sebanyak sampel p
 	if plot == 'BASK':
