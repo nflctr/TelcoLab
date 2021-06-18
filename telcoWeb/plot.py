@@ -140,10 +140,16 @@ def all(plot,mt,ct,mod,dmd,x,xf,ctF,dom):
     plt.xlim(0,2*ctF)
     # Plot Isyarat Termodulasi, FIlter/Env, Demodulasi
     plt.subplot(2,1,2)
-    if plot != 'dsbfc':
+    if plot == 'fm':
+      plt.plot(x,label='Demodulated Signal', scalex=0.5, scaley=0.1, c='#004266')
+    if plot != 'dsbfc' and plot != 'fm':
       plt.plot(xf,x,label='Filtered Signal', scalex=0.5, scaley=0.1, c='#00FF00')
+    
     plt.plot(xf,mod,label='Modulated Signal', scalex=0.5, scaley=0.1, c='#FF7700')
-    plt.plot(xf,dmd,label='Demodulated Signal', scalex=0.5, scaley=0.1, c='#004266')
+    if plot == 'fm':
+      plt.plot(dmd,label='Demodulated Signal', scalex=0.5, scaley=0.1, c='#004266')    
+    else:
+      plt.plot(xf,dmd,label='Demodulated Signal', scalex=0.5, scaley=0.1, c='#004266')
     plt.title('Modulation and Demodulation')
     plt.grid(b=True, which='major', c='#666666')
     plt.grid(b=True, which='minor', c='#999999', alpha=0.2)
