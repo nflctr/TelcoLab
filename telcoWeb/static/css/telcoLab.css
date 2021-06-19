@@ -9,6 +9,13 @@ h1,h2,h3,h4,h5,h6,p,a,button {
 span {
   font-weight: bold;
 }
+textarea {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: normal;
+  line-height: 1.5 !important;
+  margin: 0;
+  text-decoration: none;
+}
 /* End: Font Management */
 
 /* Color Management */
@@ -76,6 +83,25 @@ form .invalid {
 }
 .hidden {
   display: none;
+}
+.alert {
+  padding: 10px;
+  background-color:red;
+  border-radius: 1.25rem;
+  color: white;
+}
+.closebtn {
+  margin-left: 15px;
+  color: maroon;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.closebtn:hover {
+  color: white;
 }
 /* End: Experiment Available */
 
