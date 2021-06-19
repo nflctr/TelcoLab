@@ -3,32 +3,32 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 
-# Kategori : Artikel (textField), Materi (charField), Gambar (imgField)
-class Kategori(models.Model):
+# Type : Artikel (textField), Materi (charField), Gambar (imgField)
+class Type(models.Model):
   name = models.CharField(max_length=40, null=False, blank=False)
   def __str__(self):
     return self.name
 
-# Materi : Semua judul modul di TelcoLab (charField)
-class Materi(models.Model):
+# Modul : Semua judul modul di TelcoLab (charField)
+class Modul(models.Model):
   name = models.CharField(max_length=40, null=False, blank=False)
   def __str__(self):
     return self.name
 
-class Informations(models.Model):
-  kategori = models.ForeignKey(Kategori, on_delete=models.SET_NULL, null=True, blank=True)
-  materi = models.ForeignKey(Materi, on_delete=models.SET_NULL, null=True, blank=True)
-  judul = models.CharField(max_length=50)
-  tipe  = models.CharField(max_length=50)
-  image = models.ImageField()
-  desc   = models.TextField()
+# Information : Semua database intinya ada di sini
+class Information(models.Model):
+  kategori = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True, blank=True)
+  modul = models.ForeignKey(Modul, on_delete=models.SET_NULL, null=True, blank=True)
+  title = models.CharField(max_length=50)
+  desc  = models.CharField(max_length=50)
+  image = models.ImageField(null=True, blank=True)
+  content = HTMLField(null=True, blank=True)
   created = models.DateTimeField(auto_now_add= True)
   updated = models.DateTimeField(auto_now = True)
-  content = HTMLField()
   class Meta:
-    ordering = ('kategori','materi','judul')
+    ordering = ('materi','title')
   def __str__(self):
-    return self.judul
+    return self.title
 
 
 
