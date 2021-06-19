@@ -11,8 +11,8 @@ span {
 }
 textarea {
   font-family: 'Courier New', Courier, monospace;
-  font-weight: normal;
-  line-height: 1.5 !important;
+  font-weight: small;
+  line-height: 1 !important;
   margin: 0;
   text-decoration: none;
 }
@@ -36,8 +36,8 @@ textarea {
   padding: 0.25rem 0.5rem;
 }
 .button:hover {
-  background-color: var(--color-4);
-  color: var(--color-3);
+  background-color: var(--color-2);
+  color: var(--color-1);
 }
 /* End : Button Utility */
 
