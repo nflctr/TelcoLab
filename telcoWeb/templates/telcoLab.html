@@ -22,15 +22,15 @@
   <!-- Navbar Section -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#"><img src="/telcoWeb/static/img/title-ugm.png" height="40" alt=""></a>
+      <a class="navbar-brand" href="{% url 'coba' %}"><img src="/telcoWeb/static/img/title-ugm.png" height="40" alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link active" aria-current="page" href="#hero">HOME</a>
-          <a class="nav-link" href="#exper">PRAKTIK</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'coba' %}#hero">HOME</a>
+          <a class="nav-link" href="{% url 'coba' %}#exper">PRAKTIK</a>
         </div>
       </div>
     </div>
@@ -43,10 +43,10 @@
       <!-- Website Title -->
       <h1 class="display-3">Selamat Datang di <span>TelcoLAB</span></h1>
       <!-- Website Introduction -->
-      {% for post in post %}
-      <p class="mt-2">{{post.isi}}</p>
+      {% for post in po %}
+      <div class="mt-2">{{post.content|safe}}</div>
       {% endfor %}
-      <p class="mt-3">Cek panduan dengan mengakses tombol di bawah.</p>
+      <!-- <p class="mt-3">Cek panduan dengan mengakses tombol di bawah.</p> -->
       <!-- Guideline Button -->
       <a class="btn button mt-4" href="/telcoWeb/static/docs/Modul-Tektel.pdf" target="_blank">Panduan</a>
     </div>
@@ -87,7 +87,7 @@
             <div class="col-lg">
               <h4><span>Topik: </span>Signal Generator</h4>
               {% for modul in sg %}
-              <p class="mt-3 text-start">{{modul.isi}}</p>
+              <div class="mt-3 text-start">{{modul.content|safe}}</div>
               {% endfor %}
             </div>
             <!-- Signal Generator : Code Area -->
@@ -98,9 +98,12 @@
                 <textarea class="mt-3" name="param-generator" id="am-textarea" cols="100%"
                   rows="10" required></textarea>
                 {% if salah %}
-                <p>Anda salah memasukkan kode.</p>
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
                 {% endif %}
-                <!-- <p class="error-hint hidden">Please complete the input first</p> -->
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
             </div>
@@ -119,7 +122,7 @@
             <div class="col-lg">
               <h4><span>Topik: </span>AM DSBFC</h4>
               {% for modul in fc %}
-              <p class="mt-3 text-start">{{modul.isi}}</p>
+              <div class="mt-3 text-start">{{modul.content|safe}}</div>
               {% endfor %}
             </div>
             <!-- AM DSBFC : Code Area -->
@@ -129,6 +132,13 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-dsbfc" id="am-textarea" cols="100%"
                   rows="10" required></textarea>
+                {% if salah %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
+                {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
             </div>
@@ -147,7 +157,7 @@
             <div class="col-lg">
               <h4><span>Topik: </span>AM DSBSC</h4>
               {% for modul in sc %}
-              <p class="mt-3 text-start">{{modul.isi}}</p>
+              <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- AM DSBSC : Code Area -->
@@ -157,6 +167,13 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-dsbsc" id="am-textarea" cols="100%"
                   rows="10" required></textarea>
+                {% if salah %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
+                {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
             </div>
@@ -175,7 +192,7 @@
             <div class="col-lg">
               <h4><span>Topik: </span>AM SSB</h4>
               {% for modul in sb %}
-              <p class="mt-3 text-start">{{modul.isi}}</p>
+              <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- Signal Generator : Code Area -->
@@ -185,6 +202,13 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-ssb" id="am-textarea" cols="100%"
                   rows="10" required></textarea>
+                {% if salah %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
+                {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
             </div>
@@ -203,7 +227,7 @@
             <div class="col-lg">
               <h4><span>Topik: </span>FM Modulation</h4>
               {% for modul in fm %}
-              <p class="mt-3 text-start">{{modul.isi}}</p>
+              <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- Signal Generator : Code Area -->
@@ -213,6 +237,13 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-fm" id="am-textarea" cols="100%"
                   rows="10" required></textarea>
+                {% if salah %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
+                {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
             </div>
@@ -231,7 +262,7 @@
             <div class="col-lg">
               <h4><span>Topik: </span>Digital Modulation</h4>
               {% for modul in dg %}
-              <p class="mt-3 text-start">{{modul.isi}}</p>
+              <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- Digital Modulation : Code Area -->
@@ -241,6 +272,13 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-digital" id="am-textarea" cols="100%"
                   rows="10" required></textarea>
+                {% if salah %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
+                {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
             </div>
