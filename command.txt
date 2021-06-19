@@ -1,29 +1,29 @@
 """
 Input Signal Generator
-	- signal amp a fs b freq c      # Generate signal generator
-	- show plot                     # Menampilkan grafik
+	- signal amplitude a freq-sampling b frequency c      # Generate signal generator
+	- show plot                                           # Menampilkan grafik
 	a = Amplitudo                   c = Frekuensi isyarat
 	b = Frekuensi sampling          x = jenis gelombang yang mau ditampilkan
 	
 	* Buat tes Signal Generator
-signal amp 2 fs 2048 freq 20
+signal amplitude 2 freq-sampling 2048 frequency 20
 show sine/cosine/square/sawtooth/signal
 """
 """
 Input AM DSBFC
-  - message x amp a fs b freq c         # Generate isyarat pemodulasi m(t)
-  - carrier x amp a fs b freq c         # Generate isyarat pembawa c(t)
-  - mul(message,carrier) as *           # Modulasi DSBFC -- (mt*ct)
-  - add(*,carrier) as modulated         # Modulasi DSBFC -- (mt*ct)+ct                            
-  - add envelope as demodulated         # Demodulasi DSBFC -- deteksi envelope
-  - show plot                           # Menampilkan grafik hasil demodulasi
+  - message x amplitude a freq-sampling b frequency c         # Generate isyarat pemodulasi m(t)
+  - carrier x amplitude a freq-sampling b frequency c         # Generate isyarat pembawa c(t)
+  - mutliply(message,carrier) as *                            # Modulasi DSBFC -- (mt*ct)
+  - add(*,carrier) as modulated                               # Modulasi DSBFC -- (mt*ct)+ct                            
+  - add envelope as demodulated                               # Demodulasi DSBFC -- deteksi envelope
+  - show plot                                                 # Menampilkan grafik hasil demodulasi
   a = Amplitudo                         c = Frekuensi isyarat
   b = Frekuensi sampling                x = jenis gelombang yang mau digunakan
 
 	* Buat tes AM DSBFC
-message cosine amp 1 fs 700 freq 5
-carrier cosine amp 1 fs 700 freq 50
-mul(message,carrier) as x
+message cosine amplitude 1 freq-sampling 700 frequency 5
+carrier cosine amplitude 1 freq-sampling 700 frequency 50
+mutliply(message,carrier) as x
 add(x,carrier) as modulated
 add envelope as demodulated
 show dsbfc timeDomain/frequencyDomain
@@ -31,71 +31,71 @@ show message/carrier/modulated/envelope/demodulated timeDomain/frequencyDomain
 """
 """
 Input AM DSBSC
-  - message x amp a fs b freq c         # Generate isyarat pemodulasi m(t)
-  - carrier x amp a fs b freq c         # Generate isyarat pembawa c(t)
-  - mul(message,carrier) as modulated   # Modulasi DSBSC -- (mt*ct)                        
-  - mul(message,carrier,carrier) as **  # Demodulasi DSBSC -- (mt*ct*ct)
-  - div(**,carrier.amp)                 # Demodulasi DSBSC -- (mt*ct*ct)/Ac
-  - add filter order y cutoff z         # Demodulasi DSBSC -- filtering
-  - show plot                           # Menampilkan grafik hasil demodulasi
+  - message x amplitude a freq-sampling b frequency c         # Generate isyarat pemodulasi m(t)
+  - carrier x amplitude a freq-sampling b frequency c         # Generate isyarat pembawa c(t)
+  - mutliply(message,carrier) as modulated                    # Modulasi DSBSC -- (mt*ct)                        
+  - mutliply(message,carrier,carrier) as **                   # Demodulasi DSBSC -- (mt*ct*ct)
+  - div(**,carrier.amplitude)                                 # Demodulasi DSBSC -- (mt*ct*ct)/Ac
+  - add filter order y cutoff z                               # Demodulasi DSBSC -- filtering
+  - show plot                                                 # Menampilkan grafik hasil demodulasi
   a = Amplitudo                         c = Frekuensi isyarat
   b = Frekuensi sampling                x = jenis gelombang yang mau digunakan
   y = order dari filter                 z = Frekuensi cutoff filter
 	
 	* Buat tes AM DSBSC
-message cosine amp 1 fs 700 freq 5
-carrier cosine amp 1 fs 700 freq 50
-mul(message,carrier) as modulated
-mul(message,carrier,carrier) as x
-div(x,carrier.amp)
+message cosine amplitude 1 freq-sampling 700 frequency 5
+carrier cosine amplitude 1 freq-sampling 700 frequency 50
+mutliply(message,carrier) as modulated
+mutliply(message,carrier,carrier) as x
+div(x,carrier.amplitude)
 add filter order 50 cutoff 0.01
 show dsbsc timeDomain/frequencyDomain
 show message/carrier/modulated/demodulated/filtered timeDomain/frequencyDomain
 """
 """
 Input AM SSB
-  - message x amp a fs b freq c         # Generate isyarat pemodulasi m(t)
-  - carrier x amp a fs b freq c         # Generate isyarat pembawa c(t) cos dan sin
-  - hilbert x amp a fs b freq c         # Generate isyarat Hilbert(?)
-  - mul(message,carrier.cos) as A       # Generate a = mt*ct(cos)
-  - mul(hilbert,carrier.sin) as B       # Generate b = mt*ct(cos)
-  - sub(A,B) as usb                     # Generate USB = a-b
-  - add(A,B) as lsb                     # Generate LSB = a+b
-  - mul(2,usb,carrier.cos)              # Demodulasi SSB -- (2*usb*ct(cos))
-  - add filter order y cutoff z         # Demodulasi SSB -- filtering
-  - show plot                           # Menampilkan grafik hasil demodulasi
+  - message x amplitude a freq-sampling b frequency c         # Generate isyarat pemodulasi m(t)
+  - carrier x amplitude a freq-sampling b frequency c         # Generate isyarat pembawa c(t) cos dan sin
+  - hilbert x amplitude a freq-sampling b frequency c         # Generate isyarat Hilbert(?)
+  - mutliply(message,carrier.cos) as A                        # Generate a = mt*ct(cos)
+  - mutliply(hilbert,carrier.sin) as B                        # Generate b = mt*ct(cos)
+  - subtract(A,B) as usb                                      # Generate USB = a-b
+  - add(A,B) as lsb                                           # Generate LSB = a+b
+  - mutliply(2,usb,carrier.cos)                               # Demodulasi SSB -- (2*usb*ct(cos))
+  - add filter order y cutoff z                               # Demodulasi SSB -- filtering
+  - show plot                                                 # Menampilkan grafik hasil demodulasi
   a = Amplitudo                         c = Frekuensi isyarat
   b = Frekuensi sampling                x = jenis gelombang yang mau digunakan
 	
 	* Buat tes AM SSB
-message cosine amp 1 fs 700 freq 5
-carrier cosine amp 1 fs 700 freq 50
-hilbert sine amp 1 fs 700 freq 5
-mul(message,carrier.cos) as A
-mul(hilbert,carrier.sin) as B
-sub(A,B) as usb
-add(A,B) as lsb
-mul(2,usb,carrier.cos)
+message cosine amplitude 1 freq-sampling 700 frequency 5
+carrier cosine amplitude 1 freq-sampling 700 frequency 50
+hilbert sine amplitude 1 freq-sampling 700 frequency 5
+mutliply(message,carrier.cos) as Y
+mutliply(hilbert,carrier.sin) as Z
+subtract(Y,Z) as usb
+add(Y,Z) as lsb
+mutliply(2,usb,carrier.cos)
 add filter order 50 cutoff 0.01
 show ssb timeDomain/frequencyDomain
 show message/carrier/modulated/demodulated/filtered timeDomain/frequencyDomain
 """
 """
 Input FM Modulation
-  - message x amp a fs b freq c         # Generate isyarat pemodulasi m(t)
-  - carrier x amp a fs b freq c         # Generate isyarat pembawa c(t)
-  - modulation-index d                  # Input indeks modulasi
-  - add integrator                      # Modulasi FM -- Menambahkan integrator
-  - add phase-modulator as modulated    # Modulasi FM -- Menambahkan phase modulator
-  - add differentiator                  # Demodulasi FM -- diskriminasi frekuensi
-  - add envelope as demodulated         # Demodulasi FM -- deteksi selubung
-  - show plot                           # Menampilkan grafik hasil demodulasi
+  - message x amplitude a freq-sampling b frequency c         # Generate isyarat pemodulasi m(t)
+  - carrier x amplitude a freq-sampling b frequency c         # Generate isyarat pembawa c(t)
+  - modulation-index d                                        # Input indeks modulasi
+  - add integrator                                            # Modulasi FM -- Menambahkan integrator
+  - add phase-modulator as modulated                          # Modulasi FM -- Menambahkan phase modulator
+  - add differentiator                                        # Demodulasi FM -- diskriminasi frekuensi
+  - add envelope as demodulated                               # Demodulasi FM -- deteksi selubung
+  - show plot                                                 # Menampilkan grafik hasil demodulasi
   a = Amplitudo                         c = Frekuensi isyarat, d = indeks modulasi
   b = Frekuensi sampling                x = jenis gelombang yang mau digunakan
 	
 	* Buat tes FM Modulation
-message cosine amp 1 fs 44100 freq 10
-carrier cosine amp 1 fs 44100 freq 80
+message cosine amplitude 1 freq-sampling 44100 frequency 10
+carrier cosine amplitude 1 freq-sampling 44100 frequency 80
 modulation-index 0.25
 add integrator
 add phase-modulator as modulated
@@ -107,16 +107,16 @@ show message/carrier/modulated/demodulated timeDomain/frequencyDomain
 """
 Input Digital Modulation
 	* Buat tes Digital Modulation
-carrier fs 150 freq 10
+carrier freq-sampling 150 frequency 10
 add random-data 10
 show BASK/BFSK/BPSK/digitalModulation
 """
 
 Source Code yang dapat digunakan pada modul ini:
 
-message wave amp a fs b freq c
-carrier wave amp a fs b freq c
-mul(message,carrier) as x
+message wave amplitude a freq-sampling b frequency c
+carrier wave amplitude a freq-sampling b frequency c
+mutliply(message,carrier) as x
 add(x,carrier) as modulated
 add envelope as demodulated
 show plot
@@ -189,8 +189,8 @@ AM DSBFC biasa juga disebut dengan envelope AM karena jenis inilah yang menjadik
 
 Berikut kode yang dapat digunakan pada modul ini
 
-message wave amplitude a freq-sampling b frequency c
-carrier wave amplitude a freq-sampling b frequency c
+message wave amplitude a frequency-sampling b frequency c
+carrier wave amplitude a frequency-sampling b frequency c
 multiply(message,carrier) as x
 add(x,carrier) as modulated
 add envelope as demodulated
