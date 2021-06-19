@@ -343,3 +343,144 @@ def digital(fs,ctF,xSum,plot):
 		diShow = p.dig(t,plot,y1,0,0,xf,yf,sign)   
 	return diShow
 # -----------------------------------------------------------------------------------------------------------------------------
+""" Kamus untuk Parsing Input - Error Handling """
+kamus = [
+	# Umum
+	"amplitude","freq-sampling","frequency","show","message","carrier","as","x","add",
+	"modulated-signal","envelope-signal","demodulated-signal","filter","order","cutoff",
+	"sine","cosine","square","sawtooth",
+	# Signal Generator Only
+	
+	# DSBFC and DSBSC Only
+	"mutliply(message,carrier)","add(x,carrier)",
+	"mutliply(message,carrier,carrier)","div(x,carrier.amplitude)",
+	# SSB Only
+	"hilbert","mutliply(message,carrier.cos)","mutliply(hilbert,carrier.sin)","Y","Z",
+	"subtract(Y,Z)","add(Y,Z)","usb","lsb","mutliply(2,usb,carrier.cos)",
+	# FM Only
+	"modulation-index","integrator","phase-modulator","differentiator",
+	# Digital Only
+	"random-data"]
+# -----------------------------------------------------------------------------------------------------------------------------
+def inputData(data):
+	if data[0] == 'signal-generator':
+		amp  = float(data[2])                           # Ambil data amp  (float)
+		fs   = float(data[4])                           # Ambil data fs   (float)
+		freq = float(data[6])                           # Ambil data freq (float)
+		plot = data[8]                                  # Ambil data plot (string)
+		show = signalGenerator(plot,amp,fs,freq)
+	elif data[0] == 'am-dsbfc':
+		mt   = data[2]                                  # Input message - Jenis gelombang yang digunakan
+		mtA  = float(data[4])                           # Ambil data amplitudo m(t) (float)
+		fs   = float(data[6])                           # Ambil data frek. sampling (float)
+		mtF  = float(data[8])                           # Ambil data frekuensi m(t) (float)
+		ct   = data[10]                                 # Input carrier - Jenis gelombang yang digunakan
+		ctA  = float(data[12])                          # Ambil data amplitudo c(t) (float)
+		ctF  = float(data[16])                          # Ambil data frekuensi c(t) (float)
+		fcPlot = data[28]                               # Ambil data DSBFC apa yang mau ditampilkan di web
+		fcDom  = data[29]                               # Ambil data domain (time/freq)
+		show = amDSBFC(mt,mtA,fs,mtF,ct,ctA,ctF,fcPlot,fcDom)
+	elif data[0] == 'am-dsbsc':
+		mt   = data[2]                                  # Input message - Jenis gelombang yang digunakan
+		mtA  = float(data[4])                           # Ambil data amplitudo m(t) (float)
+		fs   = float(data[6])                           # Ambil data frek. sampling (float)
+		mtF  = float(data[8])                           # Ambil data frekuensi m(t) (float)
+		ct   = data[10]                                 # Input carrier - Jenis gelombang yang digunakan (cosinus)
+		ctA  = float(data[12])                          # Ambil data amplitudo c(t) (float)
+		ctF  = float(data[16])                          # Ambil data frekuensi c(t) (float)
+		orx  = float(data[27])                          # Ambil data orde filter
+		cut  = float(data[29])                          # Ambil data frekuensi cutoff filter
+		scPlot = data[31]                               # Ambil data DSBSC apa yang mau ditampilkan di web
+		scDom  = data[32]                               # Ambil data domain (time/freq)
+		show = amDSBSC(mt,mtA,fs,mtF,ct,ctA,ctF,orx,cut,scPlot,scDom)
+	elif data[0] == 'am-ssb':
+		mt   = data[2]                                  # Input message - Jenis gelombang yang digunakan
+		mtA  = float(data[4])                           # Ambil data amplitudo m(t) (float)
+		fs   = float(data[6])                           # Ambil data frek. sampling (float)
+		mtF  = float(data[8])                           # Ambil data frekuensi m(t) (float)
+		ct   = data[10]                                  # Input carrier - Jenis gelombang yang digunakan (cosinus dan sinus)
+		ctA  = float(data[12])                          # Ambil data amplitudo c(t) (float)
+		ctF  = float(data[16])                          # Ambil data frekuensi c(t) (float)
+		mh   = data[18]                                 # Input hilbert - Jenis gelombang yang digunakan (sinus)
+		mhA  = float(data[20])                          # Ambil data amplitudo h(t) (float)
+		mhF  = float(data[22])                          # Ambil data frekuensi h(t) (float)
+		orx  = float(data[41])                          # Ambil data orde filter
+		cut  = float(data[43])                          # Ambil data frekuensi cutoff filter
+		ssPlot = data[45]                               # Ambil data DSBSC apa yang mau ditampilkan di web
+		ssDom  = data[46]                               # Ambil data domain (time/freq)
+		show = amSSB(mt,mtA,fs,mtF,ct,ctA,ctF,mh,mhA,mhF,orx,cut,ssPlot,ssDom)
+	elif data[0] == 'fm-mod':
+		mt   = data[2]                                  # Input message - Jenis gelombang yang digunakan
+		mtA  = float(data[4])                           # Ambil data amplitudo m(t) (float)
+		fs   = float(data[6])                           # Ambil data frek. sampling (float)
+		mtF  = float(data[8])                           # Ambil data frekuensi m(t) (float)
+		ct   = data[10]                                  # Input carrier - Jenis gelombang yang digunakan (cosinus)
+		ctA  = float(data[12])                          # Ambil data amplitudo c(t) (float)
+		ctF  = float(data[16])                          # Ambil data frekuensi c(t) (float)
+		idx  = float(data[18])                          # Ambil data indeks modulasi
+		fmPlot = data[32]                               # Ambil data FM apa yang mau ditampilkan di web
+		fmDom  = data[33]                               # Ambil data domain (time/freq)
+		show = fm(mt,mtA,fs,mtF,ct,ctA,ctF,idx,fmPlot,fmDom)
+	elif data[0] == 'digital-mod':
+		fs   = float(data[3])                           # Ambil data frek. sampling (float)
+		ctF  = float(data[5])                           # Ambil data frekuensi c(t) (float)
+		xSum = int(data[8])                             # Ambil data jumlah random data yang akan di-generate
+		plot = data[10]                                  # Ambil data FM apa yang mau ditampilkan di web
+		show = digital(fs,ctF,xSum,plot)
+	return show
+
+def inputKata(data):
+	dictSG = ['amplitude','freq-sampling','frequency','show','signal-generator']
+	dictFC = ['add','add(x,carrier)','am-dsbfc','amplitude','as','carrier','demodulated-signal','envelope-signal','freq-sampling','frequency','message','modulated-signal','mutliply(message,carrier)','show','x']
+	dictSC = ['add','am-dsbsc','amplitude','as','carrier','cutoff','div(x,carrier.amplitude)','filter','freq-sampling','frequency','message','modulated-signal','mutliply(message,carrier)','mutliply(message,carrier,carrier)','order','show','x']
+	dictSS = ['Y','Z','add','add(Y,Z)','am-ssb','amplitude','as','carrier','cutoff','filter','freq-sampling','frequency','hilbert','lsb','message','mutliply(2,usb,carrier.cos)','mutliply(hilbert,carrier.sin)','mutliply(message,carrier.cos)','order','show','subtract(Y,Z)','usb']
+	dictFM = ['add','amplitude','as','carrier','demodulated-signal','differentiator','envelope-signal','fm-mod','freq-sampling','frequency','integrator','message','modulated-signal','modulation-index','phase-modulator','show']
+	dictDG = ['add','carrier','digital-mod','freq-sampling','frequency','random-data','show']
+	if data[0] == 'signal-generator':
+		data.pop()
+		data.sort()
+		del data[0:3]
+		x = (data == dictSG)
+	elif data[0] == 'am-dsbfc':
+		data.pop(2)
+		data.pop(9)
+		data.pop(26)
+		data.pop(26)
+		data.sort()
+		del data[0:6]
+		data = list(dict.fromkeys(data))
+		x = (data == dictFC)
+	elif data[0] == 'am-dsbsc':
+		data.pop(2)
+		data.pop(9)
+		data.pop(29)
+		data.pop(29)
+		data.sort()
+		del data[0:8]
+		data = list(dict.fromkeys(data))
+		x = (data == dictSC)
+	elif data[0] == 'am-ssb':
+		data.pop(2)
+		data.pop(9)
+		data.pop(16)
+		data.pop(42)
+		data.pop(42)
+		data.sort()
+		del data[0:11]
+		data = list(dict.fromkeys(data))
+		x = (data == dictSS)
+	elif data[0] == 'fm-mod':
+		data.pop(2)
+		data.pop(9)
+		data.pop(30)
+		data.pop(30)
+		data.sort()
+		del data[0:7]
+		data = list(dict.fromkeys(data))
+		x = (data == dictFM)
+	elif data[0] == 'digital-mod':
+		data.pop()
+		data.sort()
+		del data[0:3]
+		x = (data == dictDG)
+	return x

@@ -97,14 +97,19 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-generator" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
-                {% if salah %}
+                {% if typoParameter %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan angka parameter.
+                </div>
+                {% endif %}
+                {% if typoCode %}
                 <div class="mt-2 alert">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                   <strong>Error!</strong> Anda salah memasukkan kode.
                 </div>
-                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
                 {% endif %}
-                <input class="btn button mt-3" type="submit" value="Show Result" />
+                <input class="btn button mt-3" type="submit" value="Show Result" href="#nav-sg-tab"/>
               </form>
             </div>
           </div>
@@ -132,12 +137,17 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-dsbfc" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
-                {% if salah %}
+                {% if typoParameter %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan angka parameter.
+                </div>
+                {% endif %}
+                {% if typoCode %}
                 <div class="mt-2 alert">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                   <strong>Error!</strong> Anda salah memasukkan kode.
                 </div>
-                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
                 {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
@@ -167,12 +177,17 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-dsbsc" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
-                {% if salah %}
+                {% if typoParameter %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan angka parameter.
+                </div>
+                {% endif %}
+                {% if typoCode %}
                 <div class="mt-2 alert">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                   <strong>Error!</strong> Anda salah memasukkan kode.
                 </div>
-                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
                 {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
@@ -202,12 +217,17 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-ssb" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
-                {% if salah %}
+                {% if typoParameter %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan angka parameter.
+                </div>
+                {% endif %}
+                {% if typoCode %}
                 <div class="mt-2 alert">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                   <strong>Error!</strong> Anda salah memasukkan kode.
                 </div>
-                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
                 {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
@@ -237,12 +257,17 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-fm" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
-                {% if salah %}
+                {% if typoParameter %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan angka parameter.
+                </div>
+                {% endif %}
+                {% if typoCode %}
                 <div class="mt-2 alert">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                   <strong>Error!</strong> Anda salah memasukkan kode.
                 </div>
-                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
                 {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>
@@ -272,12 +297,17 @@
                 {% csrf_token %}
                 <textarea class="mt-3" name="param-digital" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
-                {% if salah %}
+                {% if typoParameter %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan angka parameter.
+                </div>
+                {% endif %}
+                {% if typoCode %}
                 <div class="mt-2 alert">
                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                   <strong>Error!</strong> Anda salah memasukkan kode.
                 </div>
-                <!-- <p class="mt-2 text-center">Anda salah memasukkan kode.</p> -->
                 {% endif %}
                 <input class="btn button mt-3" type="submit" value="Show Result" />
               </form>

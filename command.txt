@@ -6,7 +6,7 @@ Input Signal Generator
 	b = Frekuensi sampling          x = jenis gelombang yang mau ditampilkan
 	
 	* Buat tes Signal Generator
-signal amplitude 2 freq-sampling 2048 frequency 20
+signal-generator amplitude 2 freq-sampling 2048 frequency 20
 show sine/cosine/square/sawtooth/signal
 """
 """
@@ -21,11 +21,12 @@ Input AM DSBFC
   b = Frekuensi sampling                x = jenis gelombang yang mau digunakan
 
 	* Buat tes AM DSBFC
+am-dsbfc
 message cosine amplitude 1 freq-sampling 700 frequency 5
 carrier cosine amplitude 1 freq-sampling 700 frequency 50
 mutliply(message,carrier) as x
-add(x,carrier) as modulated
-add envelope as demodulated
+add(x,carrier) as modulated-signal
+add envelope-signal as demodulated-signal
 show dsbfc timeDomain/frequencyDomain
 show message/carrier/modulated/envelope/demodulated timeDomain/frequencyDomain
 """
@@ -43,9 +44,10 @@ Input AM DSBSC
   y = order dari filter                 z = Frekuensi cutoff filter
 	
 	* Buat tes AM DSBSC
+am-dsbsc
 message cosine amplitude 1 freq-sampling 700 frequency 5
 carrier cosine amplitude 1 freq-sampling 700 frequency 50
-mutliply(message,carrier) as modulated
+mutliply(message,carrier) as modulated-signal
 mutliply(message,carrier,carrier) as x
 div(x,carrier.amplitude)
 add filter order 50 cutoff 0.01
@@ -68,6 +70,7 @@ Input AM SSB
   b = Frekuensi sampling                x = jenis gelombang yang mau digunakan
 	
 	* Buat tes AM SSB
+am-ssb
 message cosine amplitude 1 freq-sampling 700 frequency 5
 carrier cosine amplitude 1 freq-sampling 700 frequency 50
 hilbert sine amplitude 1 freq-sampling 700 frequency 5
@@ -94,24 +97,27 @@ Input FM Modulation
   b = Frekuensi sampling                x = jenis gelombang yang mau digunakan
 	
 	* Buat tes FM Modulation
+fm-mod
 message cosine amplitude 1 freq-sampling 44100 frequency 10
 carrier cosine amplitude 1 freq-sampling 44100 frequency 80
 modulation-index 0.25
 add integrator
-add phase-modulator as modulated
+add phase-modulator as modulated-signal
 add differentiator
-add envelope as demodulated
+add envelope-signal as demodulated-signal
 show fm timeDomain/frequencyDomain
 show message/carrier/modulated/demodulated timeDomain/frequencyDomain
 """
 """
 Input Digital Modulation
 	* Buat tes Digital Modulation
+digital-mod
 carrier freq-sampling 150 frequency 10
 add random-data 10
 show BASK/BFSK/BPSK/digitalModulation
 """
 
+---------------------------------------------------------------------------------------------
 Source Code yang dapat digunakan pada modul ini:
 
 message wave amplitude a freq-sampling b frequency c
