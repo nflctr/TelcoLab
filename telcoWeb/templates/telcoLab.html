@@ -84,18 +84,18 @@
           <!-- Signal Generator : Guidelines and Code -->
           <div class="row justify-content-center mt-5">
             <!-- Signal Generator : Guidelines -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Topik: </span>Signal Generator</h4>
               {% for modul in sg %}
               <div class="mt-3 text-start">{{modul.content|safe}}</div>
               {% endfor %}
             </div>
             <!-- Signal Generator : Code Area -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Code: </span>Signal Generator</h4>
               <form action="generator" method="post">
                 {% csrf_token %}
-                <textarea class="mt-3" name="param-generator" id="am-textarea" cols="100%"
+                <textarea class="mt-3" name="param-generator" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
                 {% if salah %}
                 <div class="mt-2 alert">
@@ -119,18 +119,18 @@
           <!-- AM DSBFC : Guidelines and Code -->
           <div class="row justify-content-center mt-5">
             <!-- AM DSBFC : Guidelines -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Topik: </span>AM DSBFC</h4>
               {% for modul in fc %}
               <div class="mt-3 text-start">{{modul.content|safe}}</div>
               {% endfor %}
             </div>
             <!-- AM DSBFC : Code Area -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Code: </span>AM DSBFC</h4>
               <form action="dsbfc" method="post">
                 {% csrf_token %}
-                <textarea class="mt-3" name="param-dsbfc" id="am-textarea" cols="100%"
+                <textarea class="mt-3" name="param-dsbfc" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
                 {% if salah %}
                 <div class="mt-2 alert">
@@ -154,18 +154,18 @@
           <!-- AM DSBSC : Guidelines and Code -->
           <div class="row justify-content-center mt-5">
             <!-- AM DSBSC : Guidelines -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Topik: </span>AM DSBSC</h4>
               {% for modul in sc %}
               <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- AM DSBSC : Code Area -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Code: </span>AM DSBSC</h4>
               <form action="dsbsc" method="post">
                 {% csrf_token %}
-                <textarea class="mt-3" name="param-dsbsc" id="am-textarea" cols="100%"
+                <textarea class="mt-3" name="param-dsbsc" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
                 {% if salah %}
                 <div class="mt-2 alert">
@@ -189,18 +189,18 @@
           <!-- AM SSB : Guidelines and Code -->
           <div class="row justify-content-center mt-5">
             <!-- AM SSB : Guidelines -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Topik: </span>AM SSB</h4>
               {% for modul in sb %}
               <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- Signal Generator : Code Area -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Code: </span>AM SSB</h4>
               <form action="ssb" method="post">
                 {% csrf_token %}
-                <textarea class="mt-3" name="param-ssb" id="am-textarea" cols="100%"
+                <textarea class="mt-3" name="param-ssb" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
                 {% if salah %}
                 <div class="mt-2 alert">
@@ -224,18 +224,18 @@
           <!-- FM Modulation : Guidelines and Code -->
           <div class="row justify-content-center mt-5">
             <!-- FM Modulation : Guidelines -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Topik: </span>FM Modulation</h4>
               {% for modul in fm %}
               <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- Signal Generator : Code Area -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Code: </span>FM Modulation</h4>
               <form action="fm" method="post">
                 {% csrf_token %}
-                <textarea class="mt-3" name="param-fm" id="am-textarea" cols="100%"
+                <textarea class="mt-3" name="param-fm" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
                 {% if salah %}
                 <div class="mt-2 alert">
@@ -259,18 +259,18 @@
           <!-- Digital Modulation : Guidelines and Code -->
           <div class="row justify-content-center mt-5">
             <!-- Digital Modulation : Guidelines -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Topik: </span>Digital Modulation</h4>
               {% for modul in dg %}
               <p class="mt-3 text-start">{{modul.content|safe}}</p>
               {% endfor %}
             </div>
             <!-- Digital Modulation : Code Area -->
-            <div class="col-lg">
+            <div class="col-lg-6">
               <h4><span>Code: </span>Digital Modulation</h4>
               <form action="digital" method="post">
                 {% csrf_token %}
-                <textarea class="mt-3" name="param-digital" id="am-textarea" cols="100%"
+                <textarea class="mt-3" name="param-digital" id="am-textarea" cols="60%"
                   rows="10" required></textarea>
                 {% if salah %}
                 <div class="mt-2 alert">
