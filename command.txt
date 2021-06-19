@@ -184,3 +184,30 @@ Fungsi Option untuk Isyarat Pemodulasi (message) dan Pembawa (carrier)
 	- Berdasarkan input (pilih jenis gelombang apa)
 	- Dipakai di semua modul (kecuali digital modulation)
 """
+
+AM DSBFC biasa juga disebut dengan envelope AM karena jenis inilah yang menjadikan variasi tegangan pada sinyal pemodulasi sebagai envelope atau selubungnya. Proses modulasinya dilakukan dengan mengalikan antara pembawa dengan pemodulasi. Pengalian dapat dilakukan menggunakan pengali non linier yang akan menghasilkan gelombang AM DSBFC dan ditambah dengan hasil sampingan. Agar hanya hasil yang diinginkan yang diperoleh, dilakukan penapisan agar sinyal hasil sampingan dari pengali dapat dihilangkan.
+
+Berikut kode yang dapat digunakan pada modul ini
+
+message wave amplitude a freq-sampling b frequency c
+carrier wave amplitude a freq-sampling b frequency c
+multiply(message,carrier) as x
+add(x,carrier) as modulated
+add envelope as demodulated
+show plot domain
+Hal yang harus diperhatikan dalam menuliskan kode
+'wave' harus diisi dengan jenis gelombang isyarat, meliputi: sine/cosine/square/sawtooth
+'a' harus diisi dengan nilai amplitudo isyarat
+'b' harus diisi dengan nilai frekuensi pencuplikan
+'c' harus diisi dengan nilai frekuensi isyarat
+'plot' harus diisi dengan data yang ingin ditampilkan, meliputi: message/carrier/modulated/envelope/demodulated
+Jika ingin menampilkan seluruh data, isi 'plot' dengan dsbfc
+'domain' harus diisi dengan ranah yang ingin ditampilkan, meliputi: timeDomain atau frequencyDomain
+Tidak ada baris dan kata yang diubah selain yang telah disebutkan pada poin di atas
+
+
+
+---- DATABASE ----
+Type        = Artikel, Materi, Gambar/Ilustrasi, Lain-lain
+Modul       = Signal Generator, AM DSBFC, AM DSBSC, AM SSB, FM Modulation, Digital Modulation, Lain-lain
+Information = Type, Modul, Title, Image, Desc, Content, Created, Updated
