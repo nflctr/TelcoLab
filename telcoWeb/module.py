@@ -99,7 +99,7 @@ def ssb_filter(order, cutoff, ssb_demod):
     n = np.arange(0, order)
     theta = 2*np.pi*cutoff
     h_lpf = (theta/np.pi)*np.sinc(theta*(n-0.5*order/np.pi))
-    return np.convolve(ssb_demod, h_lpf, 'same')*4              # Notice di *4 (pengali)
+    return np.convolve(ssb_demod, h_lpf, 'same')*3.25              # Notice di *4 (pengali) diganti jadi 3.25 biar amplitudonya >= 1
 
 """ Modul Modulasi Frekuensi """
 # Fungsi Integrator
@@ -297,7 +297,7 @@ def fm(mt, mtA, fs, mtF, ct, ctA, ctF, idx, fmPlot, fmDom):
     xf = xProp(mt,fs)
     theta = integ(fs,ctF,mt,idx)
     fmMod = phaseMod(ctA,theta)
-    fmDmd = env(differ(fmMod))
+    fmDmd = (env(differ(fmMod)))*450   # Dikali 500 untuk menyamakan amplitudo dengan message
     if fmDom == 'frequencyDomain':
         fmMod = freq(fmMod)
         fmDmd = freq(fmDmd)
