@@ -1,14 +1,13 @@
-from os import name
 from django.urls import path
 from . import views
 
 urlpatterns = [
-  path('', views.coba, name='coba'),
-  path('generator', views.generator, name='generator'),
-  path('dsbfc', views.dsbfc, name='dsbfc'),
-  path('dsbsc', views.dsbsc, name='dsbsc'),
-  path('ssb', views.ssb, name='ssb'),
-  path('fm', views.fm, name='fm'),
-  path('digital', views.digital, name='digital'),    
+  path('', views.telcoLab, name='telcoLab'),
+  path('signalGenerator', views.signalGenerator, name='signalGenerator'),
+  path('dsbfcModulation', views.dsbfcModulation, name='dsbfcModulation'),
+  path('dsbscModulation', views.dsbscModulation, name='dsbscModulation'),
+  path('ssbModulation', views.ssbModulation, name='ssbModulation'),
+  path('frequencyModulation', views.frequencyModulation, name='frequencyModulation'),
+  path('digitalModulation', views.digitalModulation, name='digitalModulation'),    
   path('index', views.index, name='index'),
 ]
