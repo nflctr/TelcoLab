@@ -1,0 +1,225 @@
+{% extends 'telcolab/main.html' %}
+{% block exper %}
+<div class="container text-center">
+      <!-- Experiment Title -->
+      <h1 class="display-6"><span>Percobaan </span>yang Tersedia</h1>
+      <p class="mt-3">Berikut merupakan percobaan yang dapat disimulasikan secara langsung.</p>
+      <!-- Experiment Tabs -->
+      <nav>
+        <div class="nav nav-tabs justify-content-center mt-4" id="nav-tab" role="tablist">
+          <button class="nav-link {% if active_tab == 'nav-sg-tab' %} active {% endif %}" id="nav-sg-tab" data-bs-toggle="tab" data-bs-target="#nav-sg" type="button"
+            role="tab" aria-controls="nav-sg" aria-selected="true">Signal Generator</button>
+          <button class="nav-link {% if active_tab == 'nav-fc-tab' %} active {% endif %}" id="nav-fc-tab" data-bs-toggle="tab" data-bs-target="#nav-fc" type="button"
+            role="tab" aria-controls="nav-fc" aria-selected="false">AM DSBFC</button>
+          <button class="nav-link {% if active_tab == 'nav-sc-tab' %} active {% endif %}" id="nav-sc-tab" data-bs-toggle="tab" data-bs-target="#nav-sc" type="button"
+            role="tab" aria-controls="nav-sc" aria-selected="false">AM DSBSC</button>
+          <button class="nav-link {% if active_tab == 'nav-ss-tab' %} active {% endif %}" id="nav-sb-tab" data-bs-toggle="tab" data-bs-target="#nav-sb" type="button"
+            role="tab" aria-controls="nav-sb" aria-selected="false">AM SSB</button>
+          <button class="nav-link {% if active_tab == 'nav-fm-tab' %} active {% endif %}" id="nav-fm-tab" data-bs-toggle="tab" data-bs-target="#nav-fm" type="button"
+            role="tab" aria-controls="nav-fm" aria-selected="false">FM Modulation</button>
+          <button class="nav-link {% if active_tab == 'nav-dg-tab' %} active {% endif %}" id="nav-dg-tab" data-bs-toggle="tab" data-bs-target="#nav-dg" type="button"
+            role="tab" aria-controls="nav-dg" aria-selected="false">Digital Modulation</button>
+        </div>
+      </nav>
+      <!-- Experiment Tabs Content -->
+      <div class="row tab-content" id="nav-tabContent">
+        <!-- Tab : Signal Generator -->
+        <div class="tab-pane fade {% if active_tab == 'nav-sg-tab' %} show active {% endif %}" id="nav-sg" role="tabpanel" aria-labelledby="nav-sg-tab">
+          <div class="row justify-content-center mt-5">
+            <!-- Signal Generator : Guidelines -->
+            <div class="col-lg-6">
+              <h4><span>Topik: </span>Signal Generator</h4>
+              {% for modul in sg %}
+              <div class="mt-3 text-start">{{modul.Content|safe}}</div>
+              {% endfor %}
+            </div>
+            <!-- Signal Generator : Code Area -->
+            <div class="col-lg-6">
+              <h4><span>Code: </span>Signal Generator</h4>
+              <form action="{% url 'signalGenerator' %}" method="post">
+                {% csrf_token %}
+                <textarea class="mt-3" name="inputSignalGenerator" id="textareaSignalGenerator" cols="60%" rows="15" required>Tulis kode di sini</textarea>
+                {% if typoCodeSignalGenerator %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                {% endif %}
+                <input class="btn button mt-3" type="submit" value="Show Result">
+              </form>
+            </div>
+          </div>
+          <!-- Signal Generator : Output Area -->
+          <div class="row justify-content-center mt-4">
+            {% if sgShow %}
+            <img src="data:image/png;base64, {{sgShow|safe}}" />
+            {% endif %}
+          </div>
+        </div>
+        <!-- Tab : AM DSBFC Modulation -->
+        <div class="tab-pane fade {% if active_tab == 'nav-fc-tab' %} show active {% endif %}" id="nav-fc" role="tabpanel" aria-labelledby="nav-fc-tab">
+          <div class="row justify-content-center mt-5">
+            <!-- AM DSBFC : Guidelines -->
+            <div class="col-lg-6">
+              <h4><span>Topik: </span>AM DSBFC</h4>
+              {% for modul in fc %}
+              <div class="mt-3 text-start">{{modul.Content|safe}}</div>
+              {% endfor %}
+            </div>
+            <!-- AM DSBFC : Code Area -->
+            <div class="col-lg-6">
+              <h4><span>Code: </span>AM DSBFC</h4>
+              <form action="{% url 'dsbfcModulation' %}" method="post">
+                {% csrf_token %}
+                <textarea class="mt-3" name="inputDSBFC" id="textareaDSBFC" cols="60%" rows="15" required>Tulis kode di sini</textarea>
+                {% if typoCodeDSBFC %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                {% endif %}
+                <input class="btn button mt-3" type="submit" value="Show Result">
+              </form>
+            </div>
+          </div>
+          <!-- AM DSBFC : Output Area -->
+          <div class="row justify-content-center mt-4">
+            {% if fcShow %}
+            <img src="data:image/png;base64, {{fcShow|safe}}" />
+            {% endif %}
+          </div>
+        </div>
+        <!-- Tab : AM DSBSC Modulation -->
+        <div class="tab-pane fade {% if active_tab == 'nav-sc-tab' %} show active {% endif %}" id="nav-sc" role="tabpanel" aria-labelledby="nav-sc-tab">
+          <div class="row justify-content-center mt-5">
+            <!-- AM DSBSC : Guidelines -->
+            <div class="col-lg-6">
+              <h4><span>Topik: </span>AM DSBSC</h4>
+              {% for modul in sc %}
+              <p class="mt-3 text-start">{{modul.Content|safe}}</p>
+              {% endfor %}
+            </div>
+            <!-- AM DSBSC : Code Area -->
+            <div class="col-lg-6">
+              <h4><span>Code: </span>AM DSBSC</h4>
+              <form action="{% url 'dsbscModulation' %}" method="post">
+                {% csrf_token %}
+                <textarea class="mt-3" name="inputDSBSC" id="textareaDSBSC" cols="60%" rows="15" required>Tulis kode di sini</textarea>
+                {% if typoCodeDSBSC %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                {% endif %}
+                <input class="btn button mt-3" type="submit" value="Show Result">
+              </form>
+            </div>
+          </div>
+          <!-- AM DSBSC : Output Area -->
+          <div class="row justify-content-center mt-4">
+            {% if scShow %}
+            <img src="data:image/png;base64, {{scShow|safe}}" />
+            {% endif %}
+          </div>
+        </div>
+        <!-- Tab : AM SSB Modulation -->
+        <div class="tab-pane fade {% if active_tab == 'nav-ss-tab' %} show active {% endif %}" id="nav-sb" role="tabpanel" aria-labelledby="nav-sb-tab">
+          <div class="row justify-content-center mt-5">
+            <!-- AM SSB : Guidelines -->
+            <div class="col-lg-6">
+              <h4><span>Topik: </span>AM SSB</h4>
+              {% for modul in sb %}
+              <p class="mt-3 text-start">{{modul.Content|safe}}</p>
+              {% endfor %}
+            </div>
+            <!-- Signal Generator : Code Area -->
+            <div class="col-lg-6">
+              <h4><span>Code: </span>AM SSB</h4>
+              <form action="{% url 'ssbModulation' %}" method="post">
+                {% csrf_token %}
+                <textarea class="mt-3" name="inputSSB" id="textareaSSB" cols="60%" rows="15" required>Tulis kode di sini</textarea>
+                {% if typoCodeSSB %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                {% endif %}
+                <input class="btn button mt-3" type="submit" value="Show Result">
+              </form>
+            </div>
+          </div>
+          <!-- AM SSB : Output Area -->
+          <div class="row justify-content-center mt-4">
+            {% if ssShow %}
+            <img src="data:image/png;base64, {{ssShow|safe}}" />
+            {% endif %}
+          </div>
+        </div>
+        <!-- Tab : FM Modulation -->
+        <div class="tab-pane fade {% if active_tab == 'nav-fm-tab' %} show active {% endif %}" id="nav-fm" role="tabpanel" aria-labelledby="nav-fm-tab">
+          <div class="row justify-content-center mt-5">
+            <!-- FM Modulation : Guidelines -->
+            <div class="col-lg-6">
+              <h4><span>Topik: </span>FM Modulation</h4>
+              {% for modul in fm %}
+              <p class="mt-3 text-start">{{modul.Content|safe}}</p>
+              {% endfor %}
+            </div>
+            <!-- Signal Generator : Code Area -->
+            <div class="col-lg-6">
+              <h4><span>Code: </span>FM Modulation</h4>
+              <form action="{% url 'frequencyModulation' %}" method="post">
+                {% csrf_token %}
+                <textarea class="mt-3" name="inputFM" id="textareaFM" cols="60%" rows="15" required>Tulis kode di sini</textarea>
+                {% if typoCodeFM %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                {% endif %}
+                <input class="btn button mt-3" type="submit" value="Show Result">
+              </form>
+            </div>
+          </div>
+          <!-- FM Modulation : Output Area -->
+          <div class="row justify-content-center mt-4">
+            {% if fmShow %}
+            <img src="data:image/png;base64, {{fmShow|safe}}" />
+            {% endif %}
+          </div>
+        </div>
+        <!-- Tab : Digital Modulation -->
+        <div class="tab-pane fade {% if active_tab == 'nav-dg-tab' %} show active {% endif %}" id="nav-dg" role="tabpanel" aria-labelledby="nav-dg-tab">
+          <div class="row justify-content-center mt-5">
+            <!-- Digital Modulation : Guidelines -->
+            <div class="col-lg-6">
+              <h4><span>Topik: </span>Digital Modulation</h4>
+              {% for modul in dg %}
+              <p class="mt-3 text-start">{{modul.Content|safe}}</p>
+              {% endfor %}
+            </div>
+            <!-- Digital Modulation : Code Area -->
+            <div class="col-lg-6">
+              <h4><span>Code: </span>Digital Modulation</h4>
+              <form action="{% url 'digitalModulation' %}" method="post">
+                {% csrf_token %}
+                <textarea class="mt-3" name="inputDigitalModulation" id="textareaDigitalModulation" cols="60%" rows="15" required>Tulis kode di sini</textarea>
+                {% if typoCodeDigital %}
+                <div class="mt-2 alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Error!</strong> Anda salah memasukkan kode.
+                </div>
+                {% endif %}
+                <input class="btn button mt-3" type="submit" value="Show Result">
+              </form>
+            </div>
+          </div>
+          <!-- Digital Modulation : Output Area -->
+          <div class="row justify-content-center mt-4">
+            {% if diShow %}
+            <img src="data:image/png;base64, {{diShow|safe}}" />
+            {% endif %}
+          </div>
+        </div>
+        <!-- End : Experiment Content -->
+{% endblock exper %}
