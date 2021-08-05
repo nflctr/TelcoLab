@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+        <title>Trial Only</title>
+        <style>
+            input:invalid {
+                border: 2px solid red;
+            }
+            input:valid {
+                border: 2px solid lime;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container mt-5" id="signalgen">
+            <h1>Trial Only</h1>
+            <!-- Textarea for input -->
+            <form action="{% url 'test' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="param" required style="height: 50px; width: 100%; margin-top: 30px" placeholder="scope wave Am fs fm" />
+                <input class="btn btn-success mt-3" type="submit" value="Show Result" />
+            </form>
+            <!-- Output Program -->
+            <div class="row justify-content-center mt-5" id="show-result-signal">
+                {% if scope == 'scope' %}
+                <img src="data:image/png;base64, {{grafik|safe}}" />
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    </body>
+</html>

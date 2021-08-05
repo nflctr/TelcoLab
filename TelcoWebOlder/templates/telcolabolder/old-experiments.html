@@ -1,0 +1,58 @@
+{% extends "telcolabolder/base.html" %} {% load static %}
+{% block homeactive%}active{%endblock homeactive %}
+{% block body %}
+
+<!-- Experiments -->
+<div class="container experiment-class">
+  <!-- Experiments - Title -->
+  <h2 style="text-align: center">
+    <span>Experiments :</span> Signal Generator
+  </h2>
+  <p style="text-align: center">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, tenetur.
+  </p>
+  <!-- End : Experiments - Title -->
+
+  <!-- Experiments - Code Write and Guidelines -->
+  <div class="row justify-content-center">
+    <div class="col-lg guide-col">
+      <h3><span>Guide</span>lines</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam
+        laboriosam vel consectetur autem corrupti facere tempora aut ab sed
+        repellat, eveniet repellendus consequuntur, magni dolorem fuga? In
+        voluptatem aut consectetur?
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. In aliquam
+        doloremque corporis perferendis illo deserunt magnam? Iste hic assumenda
+        soluta at provident reiciendis ex iure nostrum. Nostrum eius, veniam
+        cumque veritatis nemo dolorum deleniti.
+      </p>
+      <!-- <form action="/signal" method="post"> -->
+        <!-- <p>Input Here :</p> -->
+        <!-- <input type="number" name="param1" required /><br/><br/>{{data_signal}}<br/><br/>{{data2}}<br/><br/> -->
+        <!-- <input class="btn button" type="submit" value="Execute Signal Generator" /> -->
+      <!-- </form> -->
+    </div>
+    <div class="col-lg guide-col">
+      <h3><span>Write </span>the code below</h3>
+      <form action="{% url 'external' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="param" required style="height: 100px; margin-top: 30px;" /><br>{{data1}}<br>
+        <input class="btn button" type="submit" value="Show Result" style="margin-top: 20px;" />
+      </form>
+    </div>
+  </div>
+  <!-- End : Experiments - Code Write and Guidelines -->
+
+  <!-- Experiments - Rangkaian Hasil -->
+  <div class="row">
+    <div class="col-lg test-col">
+    </div>
+  </div>
+  <!-- End : Experiments - Rangkaian Hasil -->
+</div>
+<!-- End : Experiments -->
+
+{% endblock body %}

@@ -1,0 +1,93 @@
+{% extends "telcolabolder/base.html" %}
+{% load static %}
+{% block homeactive %}active{%endblock homeactive %}
+{% block body %}
+
+
+<!-- Jumbotron -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <!-- Jumbotron - Title -->
+    <h1>Welcome to <span>TelcoLAB.</span></h1>
+    <a class="btn button" href="/TelcoWeb/static/docs/Modul-Tektel.pdf" target="_blank">Guidelines</a>
+    <!-- End : Jumbotron - Title -->
+
+    <!-- Jumbotron - Box Experiments -->
+    <div class="row justify-content-center">
+      <p class="exper-title">Available experiments :</p>
+      <div class="col-10 exper">
+        <div class="row">
+          <div class="col-lg">
+            <img src="/TelcoWeb/static/img/signal.png" alt="signal" class="float-left" />
+            <h6>SIGNAL GENERATOR</h6>
+            <p>- Signal Generator</p>
+          </div>
+          <div class="col-lg">
+            <img src="/TelcoWeb/static/img/signal.png" alt="signal" class="float-left" />
+            <h6>ANALOG MODULATION</h6>
+            <p>- Amplitude Modulation</p>
+            <p>- Frequency Modulation</p>
+          </div>
+          <div class="col-lg">
+            <img src="/TelcoWeb/static/img/signal.png" alt="signal" class="float-left" />
+            <h6>DIGITAL MODULATION</h6>
+            <p>- BASK Modulation</p>
+            <p>- BPSK Modulation</p>
+            <p>- BFSK Modulation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End : Jumbotron - Box Experiments -->
+  </div>
+</div>
+<!-- End : Jumbotron -->
+
+<!-- Manual -->
+<div class="container manual-class" id="manual">
+  <h3><span>Manuals :</span> How to Use TelcoLAB</h3>
+  <p>
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, tenetur.
+  </p>
+  <div class="row justify-content-center">
+    <div class="col-lg step-class">
+      <h4>STEP</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+        libero numquam incidunt quo. Culpa beatae impedit, suscipit dolorum sunt
+        quo?
+      </p>
+      <img src="/TelcoWeb/static/img/signal.png" alt="signal-step" />
+    </div>
+    <div class="col-lg step-class">
+      <h4>STEP</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+        libero numquam incidunt quo. Culpa beatae impedit, suscipit dolorum sunt
+        quo?
+      </p>
+      <img src="/TelcoWeb/static/img/signal.png" alt="signal-step" />
+    </div>
+    <div class="col-lg step-class">
+      <h4>STEP</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+        libero numquam incidunt quo. Culpa beatae impedit, suscipit dolorum sunt
+        quo?
+      </p>
+      <img src="/TelcoWeb/static/img/signal.png" alt="signal-step" />
+    </div>
+    <div class="col-lg step-class">
+      <h4>STEP</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+        libero numquam incidunt quo. Culpa beatae impedit, suscipit dolorum sunt
+        quo?
+      </p>
+      <img src="/TelcoWeb/static/img/signal.png" alt="signal-step" />
+    </div>
+  </div>
+</div>
+<!-- End : Manual -->
+
+{% endblock body %}
