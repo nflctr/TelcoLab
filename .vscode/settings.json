@@ -2,13 +2,10 @@
   "editor.fontSize": 12,
   "window.zoomLevel": 0,
   "terminal.integrated.fontSize": 12,
-  "workbench.colorTheme": "Noctis Obscuro",
+  "workbench.colorTheme": "Noctis Azureus",
   "editor.minimap.enabled": false,
   "python.languageServer": "Pylance",
-  "python.autoComplete.extraPaths": [
-    "./signalgen.py"
-  ],
-  "python.analysis.extraPaths": [
-    "./signalgen.py"
-  ]
+  "python.pythonPath": "C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true
 }
