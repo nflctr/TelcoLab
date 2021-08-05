@@ -1,0 +1,273 @@
+"""
+Input Signal Generator
+
+signal-generator amplitude A freq-sampling B frequency C					# Generate isyarat
+show plot																	# Menampilkan waveform
+
+* Buat tes Signal Generator
+signal-generator amplitude 2 freq-sampling 2048 frequency 20
+show sine/cosine/square/sawtooth/signal
+"""
+
+"""
+Input AM DSBFC
+
+am-dsbfc freq-sampling A													# Deklarasi frekuensi sampling
+message-signal wave amplitude B frequency C									# Deklarasi isyarat pemodulasi m(t)
+carrier-signal wave amplitude B frequency C									# Deklarasi isyarat pembawa c(t)
+message-signal*carrier-signal+carrier-signal as modulated-signal			# Modulasi DSBFC
+envelope-detection as demodulated-signal									# Demodulasi DSBFC
+show plot-waveform in domain												# Menampilkan waveform pada ranah waktu/frekuensi
+
+* Buat tes AM DSBFC
+am-dsbfc freq-sampling 1000
+message-signal cosine amplitude 1 frequency 10
+carrier-signal cosine amplitude 1 frequency 100
+message-signal*carrier-signal+carrier-signal as modulated-signal
+envelope-detection as demodulated-signal
+show message-waveform/carrier-waveform/modulated-waveform/demodulated-waveform/dsbfc-waveform in time-domain/frequency-domain
+
+* Old - Buat tes AM DSBFC
+am-dsbfc
+message cosine amplitude 1 freq-sampling 1000 frequency 5
+carrier cosine amplitude 1 freq-sampling 1000 frequency 100
+mutliply(message,carrier) as x
+add(x,carrier) as modulated-signal
+add envelope-signal as demodulated-signal
+show dsbfc timeDomain/frequencyDomain
+show message/carrier/modulated/envelope/demodulated timeDomain/frequencyDomain
+"""
+
+"""
+Input AM DSBSC
+
+am-dsbsc freq-sampling A													# Deklarasi frekuensi sampling
+message-signal wave amplitude B frequency C									# Deklarasi isyarat pemodulasi m(t)
+carrier-signal wave amplitude B frequency C									# Deklarasi isyarat pembawa c(t)
+message-signal*carrier-signal as modulated-signal							# Modulasi DSBSC
+coherent-demodulation as demodulated-signal									# Demodulasi DSBSC
+filter order D cutoff-frequency E as filtered-signal						# Filtering pada isyarat hasil demodulasi
+show plot-waveform in domain												# Menampilkan waveform pada ranah waktu/frekuensi
+
+* Buat tes AM DSBSC
+am-dsbsc freq-sampling 1000
+message-signal cosine amplitude 1 frequency 10
+carrier-signal cosine amplitude 1 frequency 100
+message-signal*carrier-signal as modulated-signal
+coherent-demodulation as demodulated-signal
+filter order 11 cutoff-frequency 55 as filtered-signal
+show message-waveform/carrier-waveform/modulated-waveform/demodulated-waveform/filtered-waveform/dsbsc-waveform in time-domain/frequency-domain
+
+* Old - Buat tes AM DSBSC
+am-dsbsc
+message cosine amplitude 2 freq-sampling 1000 frequency 10
+carrier cosine amplitude 2 freq-sampling 1000 frequency 100
+mutliply(message,carrier) as modulated-signal
+mutliply(message,carrier,carrier) as x
+div(x,carrier.amplitude)
+add filter order 11 cutoff 55
+show dsbsc timeDomain/frequencyDomain
+show message/carrier/modulated/demodulated/filtered timeDomain/frequencyDomain
+"""
+
+"""
+Input AM SSB
+
+am-ssb freq-sampling A														# Deklarasi frekuensi sampling
+message-signal wave amplitude B frequency C									# Deklarasi isyarat pemodulasi m(t)
+carrier-signal wave amplitude B frequency C									# Deklarasi isyarat pembawa c(t)
+usb-signal as modulated-signal												# Modulasi SSB dengan menggunakan Upper Side Band
+coherent-demodulation as demodulated-signal									# Demodulasi SSB
+filter order D cutoff-frequency E as filtered-signal						# Filtering pada isyarat hasil demodulasi
+show plot-waveform in domain												# Menampilkan waveform pada ranah waktu/frekuensi
+
+* Buat tes AM SSB
+am-ssb freq-sampling 1000
+message-signal sine amplitude 1 frequency 20
+carrier-signal cosine amplitude 1 frequency 100
+usb-signal as modulated-signal
+coherent-demodulation as demodulated-signal
+filter order 11 cutoff-frequency 55 as filtered-signal
+show message-waveform/carrier-waveform/modulated-waveform/demodulated-waveform/filtered-waveform/ssb-waveform in time-domain/frequency-domain
+
+* Old - Buat tes AM SSB
+am-ssb
+message sine amplitude 5 freq-sampling 1000 frequency 20
+carrier cosine amplitude 5 freq-sampling 1000 frequency 100
+hilbert sine amplitude 5 freq-sampling 1000 frequency 20
+mutliply(message,carrier.cos) as Y
+mutliply(hilbert,carrier.sin) as Z
+subtract(Y,Z) as usb
+add(Y,Z) as lsb
+mutliply(usb,carrier.cos)
+add filter order 100 cutoff 50
+show ssb timeDomain/frequencyDomain
+show message/carrier/modulated/demodulated/filtered timeDomain/frequencyDomain
+"""
+
+"""
+Input FM Modulation
+
+fm-modulation freq-sampling A												# Deklarasi frekuensi sampling
+message-signal wave amplitude B frequency C									# Deklarasi isyarat pemodulasi m(t)
+carrier-signal wave amplitude B frequency C									# Deklarasi isyarat pembawa c(t)
+modulation-index D															# Deklarasi indeks modulasi
+integrator,phase-modulator as modulated-signal								# Modulasi FM dengan menggunakan integrator dan phase modulator
+differentiator,envelope as demodulated-signal								# Demodulasi FM dengan menggunakan differentiator dan envelope
+show plot-waveform in domain												# Menampilkan waveform pada ranah waktu/frekuensi
+
+* Buat tes FM Modulation
+fm-modulation freq-sampling 1000
+message-signal cosine amplitude 1 frequency 10
+carrier-signal cosine amplitude 1 frequency 100
+modulation-index 0.25
+integrator,phase-modulator as modulated-signal
+differentiator,envelope as demodulated-signal
+show message-waveform/carrier-waveform/modulated-waveform/demodulated-waveform/fm-waveform in time-domain/frequency-domain
+
+* Old - Buat tes FM Modulation
+fm-mod
+message cosine amplitude 1 freq-sampling 44100 frequency 10
+carrier cosine amplitude 1 freq-sampling 44100 frequency 80
+modulation-index 0.25
+add integrator
+add phase-modulator as modulated-signal
+add differentiator
+add envelope-signal as demodulated-signal
+show fm timeDomain/frequencyDomain
+show message/carrier/modulated/demodulated timeDomain/frequencyDomain
+"""
+
+"""
+Input Digital Modulation
+
+digital-modulation freq-sampling A											# Deklarasi frekuensi sampling
+carrier-signal frequency B													# Deklarasi isyarat pembawa c(t)
+random-data C as message-signal												# Deklarasi random bit sequence sebagai isyarat pemodulasi m(t)
+show plot																	# Menampilkan waveform
+
+* Buat tes Digital Modulation
+digital-modulation freq-sampling 1000
+carrier-signal frequency 100
+random-data 10 as message-signal
+show BASK/BFSK/BPSK/digital-modulation
+
+* Old - Buat tes Digital Modulation
+digital-modulation
+carrier freq-sampling 1500 frequency 100
+add random-data 20
+show BASK/BFSK/BPSK/digital-modulation
+"""
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Source Code yang dapat digunakan pada modul ini:
+
+message wave amplitude a freq-sampling b frequency c
+carrier wave amplitude a freq-sampling b frequency c
+mutliply(message,carrier) as x
+add(x,carrier) as modulated
+add envelope as demodulated
+show plot
+
+Hal yang harus diperhatikan:
+
+- 'wave' harus diisi dengan jenis gelombang isyarat, meliputi: sine (sinus), cosine (cosinus), square (kotak), atau sawtooth (segitiga)
+- 'a' 'harus diisi dengan nilai besar amplitudo isyarat, baik isyarat pesan dan isyarat pembawa
+- 'b' 'harus diisi dengan nilai besar frekuensi pencuplikan
+- 'c' 'harus diisi dengan nilai besar frekuensi isyarat, baik isyarat pesan dan isyarat pembawa
+- 'plot' harus diisi dengan data yang ingin ditampilkan pada layar
+- tidak ada baris dan kata yang diubah selain yang telah disebutkan pada poin di atas
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--- MODULE.PY ---
+
+"""
+Modul Fungsi Matematika
+	- Adder			: Penjumlahan dua bilangan
+	- Subtract	 	: Pengurangan dua bilangan
+	- Multiplier 	: Perkalian dua bilangan
+	- Divide		: Pembagian dua bilangan
+	Return hasil dari operasi masing-masing
+"""
+"""
+Modul Signal Generator 
+	- Cosine		: Membangkitkan gelombang cosinus
+	- Sine			: Membangkitkan gelombang sinus
+	- Square		: Membangkitkan gelombang kotak
+	- Sawtooth		: Membangkitkan gelombang segitiga
+	- Hilbert_cos	: Membangkitkan gelombang Hilbert (cos)
+	- Hilbert_sine	: Membangkitkan gelombang Hilbert (sin)
+	Return ada 2, yaitu
+	- Time			: class 'numpy.ndarray' - N dimension array, float64bit, isinya step waktu dari 0, 0.001, ..., 0.999
+	- Gelombang		: class 'numpy.ndarray' - N dimension array, float64bit, sebaran besar gelombang sesuai waktunya
+"""
+"""
+Modul untuk Frequency Domain
+	- Catatan 		: m(t) dan c(t) harus didefinisikan lebih dulu, baru diinputkan
+	- Freq  		: freq(message_signal) atau freq(carrier_signal), untuk Fourier Transform (transformasi dari domain waktu ke frekuensi)
+	Return hasil absolut dari hasil Fourier Transform, 'numpy.ndarray'
+	- X_prop		: untuk komponen sumbu x di plotting domain frekuensi
+	Return step sumbu x untuk freq domain, 'numpy.ndarray' float64bit, panjangnya fs/2
+"""
+"""
+Modul Filter IRT dan Butterworth
+	- filter_IRT	: Untuk filter Impulse Response Truncation
+	- filter_butter	: Untuk filter Butterworth
+	Return hasil filter
+"""
+"""
+Modul simulasi AM DSBFC (Full Carrier)
+	- dsbfc_mod		: Modulasi AM DSBFC -> (Ac+m(t))*c(t)
+	- dsbfc_env		: Deteksi selubung pakai Hilbert Transform -> transformasi dari domain waktu ke domain waktu, hasilnya sama dengan sinyal yang ditransform, kompleks (ada real dan imag)
+	- dsbfc_demod	: Demodulasi AM DSBFC -> envelope dikurangi amplitudo carrier untuk hilangkan DC offset
+"""
+"""
+Modul simulasi AM DSBSC (Suppressed Carrier)
+	- dsbsc_mod		: Modulasi AM DSBSC -> m(t)*c(t) komponen cosinus
+	- dsbsc_demod	: Demodulasi AM DSBSC -> hasil modulasi dikali lagi dengan komponen cos carrier
+	- Filtering		: Pakai filter_IRT, order >> maka ripple hilang, turun/kepotong lebih tajam ke bawah, frekuensi cutoff buat melewatkan frekuensi dari m(t)
+"""
+"""
+Modul simulasi AM SSB (Single Side Band)
+	- ssb_usb		: Modulasi AM SSB (Upper Side Band) -> (m(t)*c(t)Cos)-(hilbert*c(t)Sin)
+	- ssb_lsb		: Lower Side Band -> (m(t)*c(t)Cos)+(hilbert*c(t)Sin)
+	Note, Hilbert signal selalu berlawanan dari m(t), kalau m(t) cosine maka Hilbert pasti sin
+	- ssb_demod		: Demodulasi AM SSB -> hasil modulasi dikali lagi dengan komponen cos carrier
+	- Filtering		: Pakai filter_IRT, order >> maka ripple hilang, turun/kepotong lebih tajam ke bawah, frekuensi cutoff buat melewatkan frekuensi dari m(t)
+"""
+"""
+Modul Modulasi Frekuensi
+	- integrator	: Fungsi integrator modulasi frekuensi, return adalah theta
+	- phase_mod		: Mengalikan amplitudo carrier dengan komponen sin dari theta
+	- differentiator: Calculate the n-th discrete difference along the given axis, input dari hasil modulasi FM
+	- fm_envelope	: Pakai Hilbert Transform, lalu di Fourier Transform dikali cmath
+"""
+"""
+Modul Modulasi Digital
+	- random_data	: Menghasilkan data random integer (0 atau 1) dengan jumlah sesuai input
+	- digital_mod	: Modulasi digital (BASK, BFSK, BPSK dibedakan dari if elif)
+	- digital_demod	: Demodulasi digital (BASK, BFSK, BPSK dibedakan dari if elif)
+	- konstelasi	: Fungsi untuk menghasilkan diagram konstelasi
+"""
+"""
+Fungsi Option untuk Isyarat Pemodulasi (message) dan Pembawa (carrier)
+	- Berdasarkan input (pilih jenis gelombang apa)
+	- Dipakai di semua modul (kecuali digital modulation)
+	- Ada pemanggilan fungsi dari signal generator di atas
+	- Return ada 2 seperti modul signal generator : time, gelombang
+"""
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---- DATABASE ----
+Type        = Artikel, Materi, Gambar/Ilustrasi, Lain-lain
+Modul       = Signal Generator, AM DSBFC, AM DSBSC, AM SSB, FM Modulation, Digital Modulation, Lain-lain
+Information = Type, Modul, Title, Image, Desc, Content, Created, Updated
+
+AM DSBFC (Double Side-Band Full Carrier) biasa juga disebut dengan envelope AM karena jenis inilah yang menjadikan variasi tegangan pada sinyal pemodulasi sebagai envelope atau selubungnya. Proses modulasinya dilakukan dengan mengalikan antara pembawa dengan pemodulasi. Pengalian dapat dilakukan menggunakan pengali non linier yang akan menghasilkan gelombang AM DSBFC dan ditambah dengan hasil sampingan. Agar hanya hasil yang diinginkan yang diperoleh, dilakukan penapisan agar sinyal hasil sampingan dari pengali dapat dihilangkan.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DJANGO SETTINGS REFERENCES
